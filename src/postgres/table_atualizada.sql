@@ -1,32 +1,42 @@
 DROP TABLE
-IF EXISTS usuario;
+IF EXISTS usuario
+CASCADE;
 
 DROP TABLE
-IF EXISTS cliente;
+IF EXISTS cliente
+CASCADE;
 
 DROP TABLE
-IF EXISTS categoria_produto;
+IF EXISTS categoria_produto
+CASCADE;
 
 DROP TABLE
-IF EXISTS produto;
+IF EXISTS produto
+CASCADE;
 
 DROP TABLE
-IF EXISTS pedido;
+IF EXISTS pedido
+CASCADE;
 
 DROP TABLE
-IF EXISTS item_pedido;
+IF EXISTS item_pedido
+CASCADE;
 
 DROP TABLE
-IF EXISTS pagamento;
+IF EXISTS pagamento
+CASCADE;
 
 DROP TABLE
-IF EXISTS promocao;
+IF EXISTS promocao
+CASCADE;
 
 DROP TABLE
-IF EXISTS item_promocao;
+IF EXISTS item_promocao
+CASCADE;
 
 DROP TABLE
-IF EXISTS historico_uso_promocao;
+IF EXISTS historico_uso_promocao
+CASCADE;
 
 CREATE TABLE usuario (
     id serial
@@ -130,10 +140,6 @@ INSERT INTO public.categoria_produto
 VALUES(3, 'Sobremesa');
 
 
-
-
-
-
 INSERT INTO public.cliente
 (id, nome, cpf, email, telefone, aniversario)
 VALUES(1, 'Artur', '12345678', 'email@teste.com', '79999999999', '2020-01-24 23:11:42.873');
@@ -149,11 +155,6 @@ VALUES(4, 'Jurandir', '77777777', 'jurandir@outlook.com', '81999999999', '2008-0
 INSERT INTO public.cliente
 (id, nome, cpf, email, telefone, aniversario)
 VALUES(5, 'Calabreso', '88888888', 'calabreso@aurora.com', '71999999999', '1999-02-03 00:00:00.000');
-
-
-
-
-
 
 
 INSERT INTO public.pedido
@@ -179,11 +180,6 @@ INSERT INTO public.pedido
 VALUES(8, '2024-01-24', 4, 1, '2024-01-24 21:15:41.073', '2024-01-25 21:30:55.096', 15.0);
 
 
-
-
-
-
-
 INSERT INTO public.produto
 (id, nome, id_categoria, status, preco)
 VALUES(1, 'Coca', 1, true, 5.0);
@@ -207,11 +203,6 @@ INSERT INTO public.produto
 VALUES(7, 'Empada', 2, true, 2);
 
 
-
-
-
-
-
 INSERT INTO public.promocao
 (id, texto, status)
 VALUES(1, 'Frete Gratis', true);
@@ -232,16 +223,12 @@ INSERT INTO public.promocao
 VALUES(6, 'Compre 2 pague 3', true);
 
 
-
-
-
 INSERT INTO public.usuario
 (id, nome, email, senha, tipo, status)
 VALUES(1, 'Claudinho', 'claudinho@music.com', '**********', 0, true);
 INSERT INTO public.usuario
 (id, nome, email, senha, tipo, status)
 VALUES(2, 'Buchecha', 'buchecha@sound.com', '**********', 1, true);
-
 
 --------------------------------------------------------
 
