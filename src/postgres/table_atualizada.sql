@@ -95,8 +95,10 @@ CREATE TABLE item_pedido (
 	);
 
 CREATE TABLE pagamento (
-	id_pedido INT
-	,forma_pagamento SMALLINT
+	 id serial
+	,id_pedido INT
+	,STATUS SMALLINT
+	,PRIMARY KEY (id)
 	,CONSTRAINT fk_pedido FOREIGN KEY (id_pedido) REFERENCES pedido(id)
 	);
 
