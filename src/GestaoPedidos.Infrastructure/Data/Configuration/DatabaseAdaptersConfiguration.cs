@@ -16,6 +16,7 @@ namespace GestaoPedidos.Infrastructure.Data.Configuration
             services.AddDbContext<ClienteContext>(options => options.UseLazyLoadingProxies().UseNpgsql(databaseConnection).UseSnakeCaseNamingConvention());
             services.AddDbContext<PedidoContext>(options => options.UseLazyLoadingProxies().UseNpgsql(databaseConnection).UseSnakeCaseNamingConvention());
             services.AddDbContext<ItensPedidoContext>(options => options.UseLazyLoadingProxies().UseNpgsql(databaseConnection).UseSnakeCaseNamingConvention());
+            services.AddDbContext<PagamentoContext>(options => options.UseLazyLoadingProxies().UseNpgsql(databaseConnection).UseSnakeCaseNamingConvention());
 
             services.AddTransient<IPromocaoRepository, PromocaoRepository>();
             services.AddTransient<IItemPromocaoRepository, ItemPromocaoRepository>();
@@ -28,6 +29,8 @@ namespace GestaoPedidos.Infrastructure.Data.Configuration
             services.AddTransient<IClienteRepository, ClienteRepository>();
             services.AddTransient<IPedidoRepository, PedidoRepository>();
             services.AddTransient<IItensPedidoRepository, ItensPedidoRepository>();
+
+            services.AddTransient<IPagamentoRepository, PagamentoRepository>();
             return services;
         }
     }

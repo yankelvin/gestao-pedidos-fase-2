@@ -18,15 +18,16 @@ namespace GestaoPedidos.Application.Services
             _produtoRepository = produtoRepository;
         }
 
-        public async Task CadastrarPedido(int idCliente, IEnumerable<int> produtoList)
+        public async Task<int> CadastrarPedido(int idCliente, IEnumerable<int> produtoList)
         {
             if (_clienteRepository.NaoExiste(idCliente))
                 throw new ArgumentException("Cliente informado não existe");
 
             var pedido = await ComplementaDadosPeddidoAsync(idCliente, produtoList);
-
             _pedidoRepository.Inserir(pedido, produtoList);
             _pedidoRepository.SaveChanges();
+
+            return pedido.Id;
         }
 
         private async Task<Pedido> ComplementaDadosPeddidoAsync(int idCliente, IEnumerable<int> produtoIdList)
@@ -35,6 +36,7 @@ namespace GestaoPedidos.Application.Services
 
             return new()
             {
+                Id = Convert.ToInt32(new Random().Next(100, 1000000).ToString("D4")),
                 DataPedido = DateTime.Now,
                 HorarioInicio = DateTime.Now,
                 Status = Status.Solicitado,
