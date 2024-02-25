@@ -60,6 +60,15 @@ public class PedidoRepository : IPedidoRepository
         if (statusPedido is not null)
             query = query.Where(p => p.Status.Equals(statusPedido));
 
+        query = query
+                .OrderBy(p => p.Status == Status.Solicitado)
+                .ThenBy(p => p.Status == Status.EmPreparo)
+                .ThenBy(p => p.Status == Status.Pronto)
+                .ThenBy(p => p.Status == Status.Recebido)
+                .ThenBy(p => p.HorarioInicio);
+
+        query = query.Where(p => p.Status != Status.Finalizado);
+            
         var result = query.ToList();
 
         return _mapper.Map<IEnumerable<Pedido>>(result);

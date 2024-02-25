@@ -78,8 +78,8 @@ namespace GestaoPedidos.Application.Services
 
         private Status ProximoEtapaStatus(Status status)
         {
-            if (status is Status.Recolhido)
-                return Status.Recolhido;
+            if (status is Status.Finalizado)
+                return Status.Finalizado;
 
             var statusAtual = (int)status;
 
