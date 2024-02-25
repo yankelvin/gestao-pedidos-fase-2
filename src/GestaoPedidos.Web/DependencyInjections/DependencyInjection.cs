@@ -19,6 +19,8 @@ namespace GestaoPedidos.Web.DependencyInjections
             services.AddTransient<IPromocaoService, PromocaoService>();
             services.AddTransient<IItemPromocaoService, ItemPromocaoService>();
             services.AddTransient<IHistoricoUsoPromocaoService, HistoricoUsoPromocaoService>();
+
+            services.AddTransient<IPagamentoService, PagamentoService>();
         }
 
         public static void AddMappers(this IServiceCollection services)
@@ -28,6 +30,7 @@ namespace GestaoPedidos.Web.DependencyInjections
             services.AddAutoMapper(typeof(ProdutoMappingProfile));
             services.AddAutoMapper(typeof(PromocaoMappingProfile));
             services.AddAutoMapper(typeof(UsuarioMappingProfile));
+            services.AddAutoMapper(typeof(PagamentoMappingProfile));
         }
     }
 }

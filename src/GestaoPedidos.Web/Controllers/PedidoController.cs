@@ -4,6 +4,7 @@ using GestaoPedidos.Domain.Entities;
 using GestaoPedidos.Domain.Enums;
 using GestaoPedidos.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Net.Mime;
 
 namespace GestaoPedidos.Web.Controllers;
@@ -33,8 +34,8 @@ public class PedidoController : ControllerBase
     {
         try
         {
-            await _pedidoService.CadastrarPedido(dto.IdCliente, dto.Produtos);
-            return Ok("Pedido Cadastrado");
+            var id = await _pedidoService.CadastrarPedido(dto.IdCliente, dto.Produtos);
+            return Ok(JsonConvert.SerializeObject(new { mensagem = "Pedido Cadastrado", id_pedido = id }));
         }
         catch (ArgumentException ex)
         {
