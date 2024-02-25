@@ -4,7 +4,7 @@ public enum Status
 {
     Solicitado,
     EmPreparo,
-    EmAndamento,
     Pronto,
-    Recolhido
+    Recebido,
+    Finalizado
 }
