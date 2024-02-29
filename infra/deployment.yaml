@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gestao-pedidos-deployment
+  labels:
+    app: gestao-pedidos
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: gestao-pedidos
+  template:
+    metadata:
+      labels:
+        app: gestao-pedidos
+    spec:
+      containers:
+      - name: gestao-pedidos
+        image: arturcavalcante/gestao-pedidos:latest
+        ports:
+        - containerPort: 8080
