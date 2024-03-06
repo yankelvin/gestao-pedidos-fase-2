@@ -12,6 +12,7 @@ configuration.GetSection(nameof(AppSettings)).Bind(appSettings);
 builder.Services.AddControllers(options => { });
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 builder.Services.AddServices();
+builder.Services.AddHealthChecks();
 builder.Services.AddMappers();
 builder.Services.AddDatabase(appSettings.DatabaseConnection);
 builder.Services.AddSwaggerGen(c =>
@@ -27,7 +28,8 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 WebApplication app = builder.Build();
-// app.UseHttpsRedirection();
+
+app.MapHealthChecks("/healthz");
 app.UseDeveloperExceptionPage();
 app.UseRouting();
 app.UseEndpoints(endpoints =>
@@ -35,16 +37,12 @@ app.UseEndpoints(endpoints =>
     _ = endpoints.MapControllers();
 });
 
-// if (app.Environment.IsDevelopment())
-// {
-    app.UseSwagger();
-    app.UseSwaggerUI(options =>
-    {
-        options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+app.UseSwagger();
+app.UseSwaggerUI(options =>
+{
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
 
-        options.RoutePrefix = "/swagger";
-    });
-
-// }
+    options.RoutePrefix = "/swagger";
+});
 
 app.Run();
