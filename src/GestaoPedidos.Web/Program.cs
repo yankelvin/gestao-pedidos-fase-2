@@ -27,7 +27,7 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 WebApplication app = builder.Build();
-
+// app.UseHttpsRedirection();
 app.UseDeveloperExceptionPage();
 app.UseRouting();
 app.UseEndpoints(endpoints =>
@@ -35,16 +35,16 @@ app.UseEndpoints(endpoints =>
     _ = endpoints.MapControllers();
 });
 
-if (app.Environment.IsDevelopment())
-{
+// if (app.Environment.IsDevelopment())
+// {
     app.UseSwagger();
     app.UseSwaggerUI(options =>
     {
         options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
 
-        options.RoutePrefix = string.Empty;
+        options.RoutePrefix = "/swagger";
     });
 
-}
+// }
 
 app.Run();
