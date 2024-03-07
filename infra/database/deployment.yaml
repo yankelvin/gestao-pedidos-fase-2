@@ -1,27 +1,44 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gestao-pedidos-deployment
+  name: gestao-pedidos-db-deployment
   labels:
-    app: gestao-pedidos
+    app: gestao-pedidos-db
 spec:
   selector:
     matchLabels:
-      app: gestao-pedidos
+      app: gestao-pedidos-db
   template:
     metadata:
       labels:
-        app: gestao-pedidos
+        app: gestao-pedidos-db
     spec:
       containers:
-      - name: gestao-pedidos
-        image: arturcavalcante/gestao-pedidos:latest
+      - name: gestao-pedidos-db
+        image: postgres:latest
         ports:
-        - containerPort: 8080
+        - containerPort: 5432
+        env:
+          - name: POSTGRES_USER
+            value: postgres
+          - name: POSTGRES_PASSWORD
+            value: docker
+        volumeMounts:
+          - name: gestao-pedidos-db-insert-volume
+            mountPath: /docker-entrypoint-initdb.d
+          - name: gestao-pedidos-db-data-volume
+            mountPath: /var/lib/postgresql
         resources:
           limits:
-            cpu: 50m
-            memory: 70Mi
+            cpu: 400m
+            memory: 450Mi
           requests:
-            cpu: 30m
-            memory: 50Mi
+            cpu: 140m
+            memory: 360Mi
+      volumes:
+        - name: gestao-pedidos-db-insert-volume
+          persistentVolumeClaim:
+            claimName: gestao-pedidos-db-insert-pv-claim
+        - name: gestao-pedidos-db-data-volume
+          persistentVolumeClaim:
+            claimName: gestao-pedidos-db-data-pv-claim

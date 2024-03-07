@@ -1,0 +1,29 @@
+﻿kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: gestao-pedidos-db-insert-pv-volume
+  labels:
+    type: local
+    app: gestao-pedidos-db
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 1Mi
+  accessModes:
+    - ReadOnlyMany
+  hostPath:
+    path: "/postgres/table_atualizada.sql"
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: gestao-pedidos-db-insert-pv-claim
+  labels:
+    app: gestao-pedidos-db
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadOnlyMany
+  resources:
+    requests:
+      storage: 1Mi

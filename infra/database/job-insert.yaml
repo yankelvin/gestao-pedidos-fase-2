@@ -1,0 +1,14 @@
+﻿apiVersion: batch/v1
+kind: Job
+metadata:
+  name: gestao-pedidos-db-insert-job
+  labels:
+    app: gestao-pedidos-db
+spec:
+  template:
+    spec:
+      containers:
+        - name: init-scripts
+          image: postgres:latest
+          command: ["psql", "postgresql://postgres:docker@127.0.0.1/postgres", "-f", "/postgres/table_atualizada.sql"]
+      restartPolicy: Never

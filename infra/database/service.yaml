@@ -1,19 +1,19 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: gestao-pedidos
+  name: gestao-pedidos-db-service
 spec:
   ports:
     - name: http
       protocol: TCP
-      port: 80
-      targetPort: 8080
+      port: 5432
+      targetPort: 5432
     - name: https
       protocol: TCP
       port: 443
-      targetPort: 8080
+      targetPort: 5432
   selector:
-    app: gestao-pedidos
+    app: gestao-pedidos-db
   type: LoadBalancer
 
 
