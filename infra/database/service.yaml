@@ -13,7 +13,8 @@ spec:
       port: 443
       targetPort: 5432
   selector:
-    app: gestao-pedidos-db
+    app: postgres
+#    app: gestao-pedidos-db
   type: LoadBalancer
 
 

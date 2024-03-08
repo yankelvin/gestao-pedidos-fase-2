@@ -1,44 +1,42 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gestao-pedidos-db-deployment
   labels:
-    app: gestao-pedidos-db
+    app: postgres
+  name: postgresql
 spec:
+  replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
-      app: gestao-pedidos-db
+      app: postgres
   template:
     metadata:
       labels:
-        app: gestao-pedidos-db
+        app: postgres
     spec:
       containers:
-      - name: gestao-pedidos-db
-        image: postgres:latest
-        ports:
-        - containerPort: 5432
-        env:
-          - name: POSTGRES_USER
-            value: postgres
-          - name: POSTGRES_PASSWORD
-            value: docker
-        volumeMounts:
-          - name: gestao-pedidos-db-insert-volume
-            mountPath: /docker-entrypoint-initdb.d
-          - name: gestao-pedidos-db-data-volume
-            mountPath: /var/lib/postgresql
-        resources:
-          limits:
-            cpu: 400m
-            memory: 450Mi
-          requests:
-            cpu: 140m
-            memory: 360Mi
+        - envFrom:
+            - secretRef:
+                name: postgres-env
+          image: docker.io/postgres:14
+          name: postgresql
+          ports:
+            - containerPort: 5432
+              name: postgresql
+          volumeMounts:
+            - mountPath: /docker-entrypoint-initdb.d
+              name: postgres-config
+            - mountPath: /var/lib/postgresql
+              name: postgres-data
       volumes:
-        - name: gestao-pedidos-db-insert-volume
+        - name: postgres-data
           persistentVolumeClaim:
-            claimName: gestao-pedidos-db-insert-pv-claim
-        - name: gestao-pedidos-db-data-volume
-          persistentVolumeClaim:
-            claimName: gestao-pedidos-db-data-pv-claim
+            claimName: postgres-pv-claim
+        - configMap:
+            name: postgres-config
+          name: postgres-config
+
+
+
