@@ -16,9 +16,10 @@ namespace GestaoPedidos.Web.Controllers
         private readonly IMapper _mapper;
         private readonly IUsuarioService _usuarioService;
 
-        public UsuarioController(IMapper mapper)
+        public UsuarioController(IMapper mapper, IUsuarioService usuarioService)
         {
             _mapper = mapper;
+            _usuarioService = usuarioService;
         }
 
         /// <summary>

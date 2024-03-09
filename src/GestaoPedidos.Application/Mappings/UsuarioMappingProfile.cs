@@ -11,8 +11,8 @@ namespace GestaoPedidos.Application.Mappings
         {
             CreateMap<Usuario, UsuarioDTO>();
             CreateMap<Usuario, UsuarioEntity>();
-            CreateMap<UsuarioEntity, Usuario>().ConstructUsing(p => new Usuario(p.Id, p.Nome, p.Email, p.Senha, p.Tipo, p.Ativo));
-            CreateMap<UsuarioDTO, Usuario>().ConstructUsing(p => new Usuario(p.Id, p.Nome, p.Email, p.Senha, p.Tipo, p.Ativo));
+            CreateMap<UsuarioEntity, Usuario>().ConstructUsing(p => new Usuario(p.Id, p.Nome, p.Email, p.Senha, p.Tipo, p.Status));
+            CreateMap<UsuarioDTO, Usuario>().ConstructUsing(p => new Usuario(p.Id, p.Nome, p.Email, p.Senha, p.Tipo, p.Status));
         }
     }
 }

@@ -16,9 +16,10 @@ namespace GestaoPedidos.Web.Controllers
         private readonly IMapper _mapper;
         private readonly IPromocaoService _promocaoService;
 
-        public PromocaoController(IMapper mapper)
+        public PromocaoController(IMapper mapper, IPromocaoService promocaoService)
         {
             _mapper = mapper;
+            _promocaoService = promocaoService;
         }
 
         /// <summary>
