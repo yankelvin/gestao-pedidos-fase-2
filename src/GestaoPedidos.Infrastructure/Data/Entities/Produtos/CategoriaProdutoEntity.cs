@@ -2,7 +2,7 @@
 
 namespace GestaoPedidos.Infrastructure.Data.Entities.Produtos
 {
-    [Table("categoriaproduto")]
+    [Table("categoria_produto")]
     public class CategoriaProdutoEntity : Entity
     {
         public string Nome { get; set; }
