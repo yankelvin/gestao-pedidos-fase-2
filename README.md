@@ -74,3 +74,18 @@ Para o banco de dados usamos postgresql e definimos o deployment do servidor de 
 Abaixo temos a imagem ilustrativa;
 
 ![Técnino_k8s](./images-readme//GestaoPedidosK8s.png)
+
+
+## Database
+
+Para a aplicação gestão de pedidos utilizamos um banco relacional PostgreSQL, para garatir a estrutura, integridade da relação entre as entidades principais, cliente, produto e pedido, além das tabelas complementares.
+
+- Um cliente pode ter diversos pedidos, o qual este pedido pode ter diversos produtos. Desta forma temos a tabela cliente com o relacionamento 1xN com o pedido. 
+- Pelo fato do pedido ter diversos produtos, a tabela pedido e produto tem um relacionamento NxM. Onde diversos produtos podem estar contidos em um pedido.
+- Este produto detém uma categoria, e essa categoria pode estar alocada em diversos produtos, com isso, está estruturado que a categoria produto pode estar relacionado a diversos produtos.
+- O cliente tem possilidade de usar promoções. E para comportar essa estratégia, uma promoção pode estar relacionada a diversos lientes e diversos clientes podem estar usando tal promoção. A tabela então fica definida com 1xN a tabela Cliente com a tabela UsoPromoções, e a tabela promoção 1xN com a tabela UsoPromoções.
+- Relacionado a promoção podemos ter diversos produtos, estes por sua vez podem estar relacionado a diversas promoções. Para isso, a tabela Produto tem um relacionamento 1xN com ItensPromoção e 1xN entre a tabela Promoção e ItensPromoção.
+Atrelado ao pedido temos a tabela de pagamento para sinalizar o status.
+Para alocar o usuário foi criado a tabela Usuário contendo as informações básicas do mesmo.
+
+![DB](./images-readme//DB.png)
